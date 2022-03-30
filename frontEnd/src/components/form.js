@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
-import Checkbox from "./components/checkbox";
+import Checkbox from "./checkbox";
 import {
   View,
   Text,
