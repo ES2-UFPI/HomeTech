@@ -1,10 +1,14 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View,TextInput ,Image,FlatList,TouchableOpacity, SafeAreaView } from 'react-native';
 
 
 
 export default function Forms(navigation) {
+    const [marca, setMarca] = useState('');
+    const [garantia, setGarantia] = useState('');
+    const [problema, setProblema] = useState('');
+    const [informacoeasAdicionais, setInformacoeasAdicionais] = useState('');
 
     return(
         <Formik>
@@ -15,8 +19,8 @@ export default function Forms(navigation) {
                     <View style={styles.input}>
                       <TextInput
                         style={{ marginLeft: 10 }}
-                
-                        
+                        value={marca}
+                        onChange ={ e => setMarca(e.target.value)}
                     
                       />
                     </View>
@@ -26,7 +30,8 @@ export default function Forms(navigation) {
                     <View style={styles.input}>
                       <TextInput
                         style={{ marginLeft: 10 }}
-                
+                        value={garantia}
+                        onChange ={ e => setGarantia(e.target.value)}
                         
                     
                       />
@@ -37,8 +42,8 @@ export default function Forms(navigation) {
                     <View style={styles.input}>
                       <TextInput
                         style={{ marginLeft: 10 }}
-                
-                        
+                        value={problema}
+                        onChange ={ e => setProblema(e.target.value)}                       
                     
                       />
                     </View>
@@ -48,9 +53,9 @@ export default function Forms(navigation) {
                     <View style={styles.input}>
                       <TextInput
                         style={{ marginLeft: 10 }}
-                
-                        
-                    
+                        value={informacoeasAdicionais}
+                        onChange ={ e => setInformacoeasAdicionais(e.target.value)}
+                                            
                       />
                     </View>
                   </View>
