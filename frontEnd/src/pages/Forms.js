@@ -8,9 +8,7 @@ export default function Forms(navigation) {
     return(
         <View>
             <Cadastro />
-        </View>
-        
-        
+        </View>        
         );
 
 }
