@@ -62,7 +62,7 @@ export default function ListServices({navigation}) {
 
       {
         id:10,
-        name:" Mircro-ondas", 
+        name:"Mircro-ondas", 
   
       }, 
       {
@@ -96,9 +96,14 @@ export default function ListServices({navigation}) {
 
  ]
 
+ let onPressItem = (id) => {
+  navigation.navigate('Forms')
+return id
+ }
+
  const oneService = ( {item} ) => (
   
-    <TouchableOpacity onPress={() => navigation.navigate('Forms')}>
+    <TouchableOpacity onPress={() => console.log(onPressItem(item.id))}>
   <View style = {styles.item}>
   <Text style = {styles.name}>{item.name}</Text>
   </View>
@@ -138,13 +143,14 @@ export default function ListServices({navigation}) {
   
   const styles = StyleSheet.create({
     listHeader:{
-   height: 100,
+   height: 70,
    alignItems: 'center',
    justifyContent: 'center',
+   backgroundColor: '#3B5998',
    
     },
    lisHeadline:{
-  color: '#333',
+  color: '#FFF',
   fontSize: 21,
   fontWeight: 'bold',
   
@@ -155,13 +161,8 @@ export default function ListServices({navigation}) {
   flex: 1,
   flexDirection: 'row',
   alignItems: 'center',
-  paddingVertical: 13,
-  
-   },
-  
-   service:{
-  height: 55,
-  width: 55,
+  paddingVertical: 10,
+
   
    },
   
@@ -172,12 +173,9 @@ export default function ListServices({navigation}) {
   
    },
   
-  
-  
-   
     separator: {
       height: 1,
-      backgroundColor: '#CCC',
+      backgroundColor: '#FFF',
       width: '100%',
       
     },

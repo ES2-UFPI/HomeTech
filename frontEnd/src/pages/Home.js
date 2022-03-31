@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React , { Component } from 'react';
+import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView} from 'react-native';
+import SearchBar from '../components/SearchBar';
 
 export default function Home({navigation}) {
 
@@ -38,12 +37,36 @@ image: require('../assets/assistenciaTecnica.png'),
 
  ]
 
+
+ let onPressItem = (id) => {
+
+   if(id == 1){
+    navigation.navigate('ListServices')
+   }
+   else if (id == 2){
+    alert('Serviço Indisponível')
+   }
+   else if (id == 3){
+    alert('Serviço Indisponível')
+     
+   }
+   else if (id ==4){
+    alert('Serviço Indisponível')
+   }
+   else if(id==5){
+    alert('Serviço Indisponível')
+   }
+
+return id
+ }
+
+
  const oneService = ( {item} ) => (
   
-  <TouchableOpacity onPress={() => navigation.navigate('ListServices')}>
+  <TouchableOpacity onPress={() => console.log(onPressItem(item.id)) }>
 <View style = {styles.item}>
-
 <View style = {styles.serviceContainer}>
+  
   <Image source ={item.image} style = {styles.service} />
 </View>
 <Text style = {styles.name}>{item.name}</Text>
@@ -64,10 +87,13 @@ itemSeparator = () => {
 
   return (
     <SafeAreaView >
-     
       <FlatList
+      
       ListHeaderComponentStyle = {styles.listHeader}
+     
       ListHeaderComponent={headerComponent}
+     
+      
      data = {services}
      renderItem = {oneService} 
      
@@ -84,10 +110,11 @@ const styles = StyleSheet.create({
  height: 100,
  alignItems: 'center',
  justifyContent: 'center',
+ backgroundColor: '#3B5998',
  
   },
  lisHeadline:{
-color: '#333',
+color: '#FFF',
 fontSize: 21,
 fontWeight: 'bold',
 
@@ -101,6 +128,9 @@ alignItems: 'center',
 paddingVertical: 13,
 
  },
+
+
+
  serviceContainer:{
   backgroundColor: '#D9D9D9',
   borderRadius: 100,
