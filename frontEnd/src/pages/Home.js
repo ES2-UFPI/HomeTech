@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -44,12 +44,6 @@ export default function Home({ navigation }) {
     },
   ];
 
-  const[searchText,setSearchText] = useState('');
-   
-  const handleOrderClick = () => {
-   
-  };
-
   const oneService = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate("ListServices")}>
       <View style={styles.item}>
@@ -65,6 +59,37 @@ export default function Home({ navigation }) {
     return <View style={styles.separator} />;
   };
 
+
+
+
+
+
+
+  const[searchText,setSearchText] = useState('');
+
+  useEffect(() => {
+    if (searchText === '') {
+      setList(services);
+    } else {
+      setList(
+        services.filter(
+          (item) =>
+            item.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+        )
+      );
+    }
+  }, [searchText]);
+   
+  const handleOrderClick = () => {
+    let newList = [...services];
+
+    newList.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
+
+    setList(newList);
+  };
+
+  const[list,setList] = useState(services);
+
   return (
     <SafeAreaView>
       <View style={styles.header}>
@@ -77,6 +102,7 @@ export default function Home({ navigation }) {
           placeholder="Buscar serviço..."
           placeholderTextColor="#888"
           itemSeparator
+          value={searchText}
           onChangeText={(t) => setSearchText(t)}
         />
         <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
@@ -84,7 +110,7 @@ export default function Home({ navigation }) {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={services}
+        data={list}
         renderItem={oneService}
         ItemSeparatorComponent={itemSeparator}
       />
