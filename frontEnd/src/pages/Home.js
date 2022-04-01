@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { FontAwesome5 } from '@expo/vector-icons';
 
 export default function Home({ navigation }) {
   const services = [
@@ -43,6 +44,12 @@ export default function Home({ navigation }) {
     },
   ];
 
+  const[searchText,setSearchText] = useState('');
+   
+  const handleOrderClick = () => {
+   
+  };
+
   const oneService = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate("ListServices")}>
       <View style={styles.item}>
@@ -64,14 +71,17 @@ export default function Home({ navigation }) {
         <Text style={styles.lisHeadline}>HomeTech Services</Text>
       </View>
 
-      <View style={styles.container}>
+      <View style={styles.searchArea}>
         <TextInput
           style={styles.input}
           placeholder="Buscar serviço..."
           placeholderTextColor="#888"
           itemSeparator
-          /*onChangeText={(t) => setSearchText(t)}*/
+          onChangeText={(t) => setSearchText(t)}
         />
+        <TouchableOpacity onPress={handleOrderClick} style={styles.orderButton}>
+        <FontAwesome5 name="sort-alpha-down" size={32} color="black" />
+        </TouchableOpacity>
       </View>
       <FlatList
         data={services}
@@ -96,10 +106,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   container: {
-    padding: 4,
-    height: 100,
+    flex:1,
+   
   },
-
+  searchArea: {
+    flex: 1,
+    backgroundColor: "000",
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   item: {
     flex: 1,
     flexDirection: "row",
@@ -131,16 +146,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#CCC",
     width: "100%",
   },
+  searchArea: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  orderButton: {
+    width: 32,
+    marginRight: 30,
+  },
 
   input: {
-    flex: 1,
     height: 50,
+    width: 400,
     backgroundColor: "#363636",
-    margin: 30,
+    margin: 20,
     borderRadius: 5,
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
     color: "#FFFFFF",
   },
+  
 });
