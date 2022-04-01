@@ -1,36 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import React , { Component } from 'react';
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView} from 'react-native';
-import SearchBar from '../components/SearchBar';
 
-export default function Home({navigation}) {
+
+export default function HomeScreen({navigation}) {
 
  const services = [
  {
 id: 1,
 name: 'Assistência Técnica',
-image: require('../assets/assistenciaTecnica.png'),
+image: require('../../assets/assistenciaTecnica.png'),
 
  },
  {
   id: 2,
   name: 'Reformas e Reparos',
-  image: require('../assets/reformasReparos.png'),
+  image: require('../../assets/reformasReparos.png'),
    },
    {
     id: 3,
     name: 'Eventos',
-    image: require('../assets/eventos.png'),
+    image: require('../../assets/eventos.png'),
      },
      {
       id: 4,  
       name: 'Moda e Beleza',
-     image: require('../assets/beauty.png'),
+     image: require('../../assets/beauty.png'),
        },
        {
         id: 5,
         name: 'Automóveis',
-        image: require('../assets/carro.png'),
+        image: require('../../assets/carro.png'),
          },
 
 

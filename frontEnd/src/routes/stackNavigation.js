@@ -1,9 +1,10 @@
 
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../pages/Home"
-import ListServices from "../pages/ListServices"
-import Forms from "../pages/Forms"
+import ListServices from "../pages/Client/ListServices"
+import Forms from "../pages/Client/Forms"
+import TabRoutesTech from "./TabRoutesTech"
+import TabRoutesClient from "./TabRoutesClient";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,15 +12,26 @@ export default function StackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
       
-      { 
+      { /*
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="TabRoutesClient"
+        component={TabRoutesClient}
         options={{ headerShown: false }}
-      />     
+      />  */   
       }
-          <Stack.Screen name="ListServices" component={ListServices} />
-          <Stack.Screen name="Forms" component={Forms} />
+
+{
+       <Stack.Screen
+        name="TabRoutesTech"
+        component={TabRoutesTech}
+        options={{ headerShown: false }}
+      />
+      }
+          <Stack.Screen name="ListServices" component={ListServices}   options={{ headerShown: false }}/>
+         
+          <Stack.Screen name="Forms" component={Forms} options={{ headerShown: false }}/>
+      
+
     </Stack.Navigator>
   );
 }
