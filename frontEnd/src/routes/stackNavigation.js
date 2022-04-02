@@ -12,12 +12,12 @@ export default function StackNavigation() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
       
-      { /*
+      { 
       <Stack.Screen
         name="TabRoutesClient"
         component={TabRoutesClient}
         options={{ headerShown: false }}
-      />  */   
+      />    
       }
 
 {
