@@ -7,7 +7,7 @@ export default function Express(navigation) {
 
 return (
 
-<View>  
+<View style={styles.container}>  
 
 
 <Text>Página Home do serviço express visão tecnico </Text>
@@ -19,3 +19,17 @@ return (
 
 
 }
+
+const styles = StyleSheet.create({
+
+    container:{
+    
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+    },
+
+
+})

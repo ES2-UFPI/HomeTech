@@ -103,7 +103,7 @@ return id
 
  const oneService = ( {item} ) => (
   
-    <TouchableOpacity onPress={() => console.log(onPressItem(item.id))}>
+    <TouchableOpacity onPress={() => onPressItem(item.id)}>
   <View style = {styles.item}>
   <Text style = {styles.name}>{item.name}</Text>
   </View>
