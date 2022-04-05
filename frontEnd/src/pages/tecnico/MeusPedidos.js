@@ -7,7 +7,7 @@ export default function MeusPedidos(navigation) {
 
 return (
 
-<View>  
+<View style={styles.container}>  
 
 
 <Text>Página Home dos pedidos recebidos do tecnico </Text>
@@ -19,3 +19,16 @@ return (
 
 
 }
+const styles = StyleSheet.create({
+
+    container:{
+    
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+    },
+
+
+})

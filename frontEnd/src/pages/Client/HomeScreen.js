@@ -44,8 +44,30 @@ export default function Home({ navigation }) {
     },
   ];
 
+  let onPressItem = (id) => {
+
+    if(id == 1){
+     navigation.navigate('ListServices')
+    }
+    else if (id == 2){
+     alert('Serviço Indisponível')
+    }
+    else if (id == 3){
+     alert('Serviço Indisponível')
+      
+    }
+    else if (id ==4){
+     alert('Serviço Indisponível')
+    }
+    else if(id==5){
+     alert('Serviço Indisponível')
+    }
+ 
+ return id
+  }
+  
   const oneService = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate("ListServices")}>
+    <TouchableOpacity onPress={() => onPressItem(item.id)}>
       <View style={styles.item}>
         <View style={styles.serviceContainer}>
           <Image source={item.image} style={styles.service} />
@@ -180,13 +202,15 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     width: 400,
-    backgroundColor: "#363636",
+    backgroundColor: "#FFF",
     margin: 20,
     borderRadius: 5,
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
     color: "#FFFFFF",
+    justifyContent: "center",
+    flex: 1,
   },
   
 });
