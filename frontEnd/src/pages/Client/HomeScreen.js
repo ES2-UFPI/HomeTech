@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
-    color: "#FFFFFF",
+    color: "#000000",
     justifyContent: "center",
     flex: 1,
   },
