@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
   let onPressItem = (id) => {
 
     if(id == 1){
-     navigation.navigate('ListServices')
+     navigation.navigate('ListAssitenciaTecnica')
     }
     else if (id == 2){
      alert('Serviço Indisponível')
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
-    color: "#FFFFFF",
+  color: "#FFFFFF",
     justifyContent: "center",
     flex: 1,
   },
