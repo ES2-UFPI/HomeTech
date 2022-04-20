@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView } from 'react-native';
+import Checkbox from "../../components/checkbox";
 
 
+export default function ListAutomotivo({navigation}) {
 
-export default function ListServices({navigation}) {
+
 
  const assistenciaTecnicaList = [
 
     {
       id:1,
-      name:"Aparelho de som", 
+      name:"Alarme automotivo", 
 
     },
     {
@@ -20,93 +22,79 @@ export default function ListServices({navigation}) {
 
       {
         id:3,
-        name:"Celular", 
+        name:"Auto elétrico", 
   
       },
 
       {
         id:4,
-        name:"Computador Desktop", 
+        name:"Borracharia", 
   
       },
 
       {
         id:5,
-        name:"Câmera", 
+        name:"Guincho", 
   
       },
 
       {
         id:6,
-        name:"Fone de ouvido", 
+        name:"Higienização e Polimento", 
   
       },
 
       {
         id:7,
-        name:"Eletrodoméstico", 
+        name:"Insulfilm", 
   
       },
 
       {
         id:8,
-        name:"Geladeira e freezer", 
+        name:"Martelinho de ouro", 
   
       },
 
       {
         id:9,
-        name:"Impressora", 
+        name:"Pintura", 
   
       },
 
       {
         id:10,
-        name:"Mircro-ondas", 
+        name:"Som automotivo", 
   
       }, 
       {
         id:11,
-        name:"Relógio", 
+        name:"Vendas de Automóveis", 
   
       },
 
       {
         id:12,
-        name:"Tablet", 
+        name:"Vidraçaria", 
   
       },
-      {
-        id:13,
-        name:"Telefone Fixo", 
-  
-      },
-
-      {
-        id:14,
-        name:"Televisão", 
-  
-      },
-
-      {
-        id:15,
-        name:"Vídeo game", 
-  
-      },
+      
 
  ]
 
- let onPressItem = (id) => {
-  navigation.navigate('Forms')
-return id
+ let onPressItem = (name) => {
+ {/*
+ navigation.navigate("Forms")*/}
+alert('Serviço selececionado : ' + name)
  }
 
  const oneService = ( {item} ) => (
   
-    <TouchableOpacity onPress={() => onPressItem(item.id)}>
+    <TouchableOpacity onPress={() => onPressItem(item.name)}>
   <View style = {styles.item}>
   <Text style = {styles.name}>{item.name}</Text>
   </View>
+
   </TouchableOpacity>
   )
   
@@ -117,7 +105,7 @@ return id
 
   headerComponent = () => {
 
-    return <Text style = {styles.lisHeadline}>Serviços Assistência Técnica</Text>
+    return <Text style = {styles.lisHeadline}>Serviços Automóveis</Text>
   }
   
   itemSeparator = () => {
@@ -137,6 +125,31 @@ return id
       
      
        />
+
+<View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 30,
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    navigation.navigate('LoguinTech')
+                  }}
+                >
+                  <Text
+                    style={{ color: "white", fontSize: 20, fontWeight: "700" }}
+                  >
+                    confirmar
+                  </Text>
+                </TouchableOpacity>
+                
+              </View>
+
         </SafeAreaView>
     );
   }
@@ -172,12 +185,26 @@ return id
   marginLeft: 15,
   
    },
+   checkboxview: {
+    flexDirection: "row",
+    marginTop: 30,
+    alignItems: "center",
+  },
   
     separator: {
       height: 1,
       backgroundColor: '#FFF',
       width: '100%',
       
+    },
+    button: {
+      height: 38,
+      width: 105,
+      flex:1,
+      backgroundColor: "#3B5998",
+      borderRadius: 15,
+      alignItems: "center",
+      justifyContent: "center",
     },
   });
   
