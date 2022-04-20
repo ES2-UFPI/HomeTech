@@ -1,7 +1,7 @@
 
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import CadastroTech from "../pages/tecnico/Cadastro"
 import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
 import Forms from "../pages/Client/Forms"
 import TabRoutesTech from "./TabRoutesTech"
@@ -36,7 +36,7 @@ export default function StackNavigation() {
          
           <Stack.Screen name="Forms" component={Forms} options={{ headerShown: false }}/>
       
-
+          <Stack.Screen name="CadastroTech" component={CadastroTech} />
 
     </Stack.Navigator>
   );
