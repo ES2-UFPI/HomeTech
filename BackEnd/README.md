@@ -1,5 +1,5 @@
 
 
 ### requiriment of the application
-[x] - Login
-[x] - casdastro
+- [x]  Login
+- [x]  casdastro
