@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
     login: {
         type: mongoose.Types.ObjectId,
         ref: 'UserLogin',
-        required: true
+        required: true,
     }
 })
 

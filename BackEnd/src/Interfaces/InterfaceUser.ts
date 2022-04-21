@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface IUser {
     readonly _id?: String;
     lastname: String;
@@ -9,6 +11,7 @@ export interface IUser {
     complemento?: String
     estados?: String
     typePeople?: String;
+    readonly ObjectId?: mongoose.Types.ObjectId;
 }
 
 export interface IUserLogin {

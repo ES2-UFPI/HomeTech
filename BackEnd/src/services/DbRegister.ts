@@ -11,9 +11,18 @@ class DbRegister {
     async createLogin(data: IUserLogin): Promise<IUser> {
         return await UserLogin.create(data)
     }
-    async login(data: IUserLogin): Promise<IUserLogin> {
-        const user: any = await UserModel.findOne(data)
-        return user
+    async login(data: IUserLogin): Promise<any> {
+
+        const findEmail = await UserLogin.findOne({
+            email: data.email
+        })
+
+        if (findEmail && findEmail.password === data.password) {
+            return findEmail
+        }
+
+        return null
+
     }
 }
 
