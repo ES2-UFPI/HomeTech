@@ -8,7 +8,9 @@ export abstract class UserMethod {
     async create(user: IUser): Promise<IUser> {
         return await DbRegister.create(user)
     }
-
+    async createLogin(user: IUserLogin): Promise<IUser> {
+        return await DbRegister.createLogin(user)
+    }
     async login(user: IUserLogin) {
         await DbRegister.login(user)
     }

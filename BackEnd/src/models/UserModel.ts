@@ -36,8 +36,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: 'pessoa física'
+    },
+    login: {
+        type: mongoose.Types.ObjectId,
+        ref: 'UserLogin',
+        required: true
     }
-
 })
 
 const UserModel = mongoose.model('User', UserSchema)

@@ -13,11 +13,27 @@ class UserController {
     constructor() {
 
     }
-    async create(req: Request, res: Response): Promise<Response> {
+
+    async createLoginAndPassword(req: Request, res: Response): Promise<Response> {
+
+        try {
+            const user: IUserLogin = req.body
+
+            const data = await test.createLogin(user)
+            const token = data._id
+
+            return res.status(201).json({ message: 'created login and password', token: token })
+        } catch (error: any) {
+            // console.log(error.message)
+            return res.status(400).json({ message: error.message })
+        }
+
+    }
+    async Register(req: Request, res: Response): Promise<Response> {
 
         try {
             const user: IUser = req.body
-            console.log(user)
+
             const data = await test.create(user)
             const token = data._id
 
@@ -32,7 +48,7 @@ class UserController {
         try {
             const userLogin: IUserLogin = req.body
             const user = test.login(userLogin)
-            console.log(user)
+
             return res.status(201).json({ token: "" })
         } catch (error: any) {
             return res.status(400).json({ message: error })
