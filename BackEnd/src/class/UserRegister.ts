@@ -1,7 +1,8 @@
 import { Response } from 'express';
 import mongoose from 'mongoose';
 import { Model } from 'mongoose';
-import { IUser, IUserLogin } from '../Interfaces/InterfaceUser';
+import { IUser, IUserFind, IUserLogin } from '../Interfaces/InterfaceUser';
+import DbFind from '../services/DbFind';
 import DbRegister from '../services/DbRegister'
 
 export abstract class UserMethod {
@@ -15,5 +16,8 @@ export abstract class UserMethod {
 
         return await DbRegister.login(user)
     }
-}
 
+    async findOne(user: IUserFind) {
+        return await DbFind.find(user)
+    }
+}

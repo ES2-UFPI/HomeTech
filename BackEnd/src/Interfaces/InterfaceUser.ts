@@ -1,20 +1,25 @@
 import mongoose from "mongoose";
 
 export interface IUser {
-    readonly _id?: String;
-    lastname: String;
-    firstname: String;
-    avatar?: String;
-    codepostal?: String;
-    endereco?: String;
-    city?: String;
-    complemento?: String
-    estados?: String
-    typePeople?: String;
-    readonly ObjectId?: mongoose.Types.ObjectId;
+    readonly _id?: string;
+    lastname: string;
+    firstname: string;
+    avatar?: string;
+    codepostal?: string;
+    endereco?: string;
+    city?: string;
+    complemento?: string
+    estados?: string
+    typePeople?: string;
+    login?: mongoose.Types.ObjectId;
 }
 
 export interface IUserLogin {
-    email: String;
-    password: String;
+    email: string;
+    password: string;
+}
+
+export interface IUserFind {
+    email?: string;
+    _id?: string;
 }

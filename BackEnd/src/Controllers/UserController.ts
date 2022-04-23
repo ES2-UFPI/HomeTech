@@ -1,7 +1,9 @@
 import { Request, Response } from "express"
+import mongoose from "mongoose"
 import { UserMethod } from "../class/UserRegister"
-import { IUser, IUserLogin } from "../Interfaces/InterfaceUser"
+import { IUser, IUserFind, IUserLogin } from "../Interfaces/InterfaceUser"
 import { jwt } from '../middleware/token'
+import bcrypt from 'bcrypt'
 
 class RegisterConcrect extends UserMethod {
 
@@ -14,7 +16,11 @@ class UserController {
     async createLoginAndPassword(req: Request, res: Response): Promise<Response> {
 
         try {
+
             const user: IUserLogin = req.body
+
+            user.password = bcrypt.hashSync(req.body.password, 10)
+
             const data = await concrect.createLogin(user)
             const id = data._id
             const token = jwt(`${id}`)
@@ -25,16 +31,18 @@ class UserController {
         }
 
     }
-    async Register(req: Request, res: Response): Promise<Response> {
-
+    async Register(req: any, res: Response): Promise<Response> {
+        console.log(req.user)
         try {
             const user: IUser = req.body
+            user.login = new mongoose.Types.ObjectId(req.user)
+
             const data = await concrect.create(user)
             const id = data._id
             const token = jwt(`${id}`)
             return res.status(201).json({ message: 'user created', token: token })
         } catch (error: any) {
-            console.log(error.message)
+            //console.log(error.message)
             return res.status(400).json({ message: error.message })
         }
 
@@ -56,6 +64,19 @@ class UserController {
             return res.status(400).json({ message: error })
         }
 
+    }
+
+    async findUser(req: any, res: Response): Promise<Response> {
+
+        const user: IUserFind = {
+            _id: req.user,
+            email: req.query
+        }
+
+        const data: any = await concrect.findOne(user)
+        console.log(data)
+
+        return res.status(200).json(data)
     }
 }
 export default new UserController()

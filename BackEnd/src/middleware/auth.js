@@ -2,13 +2,13 @@
 const  jwt = require('jsonwebtoken')
 
 
-const secret = "031EA78CFB8CF82C686C17E17836F2D6FB9371423786130ADB843382733773DA"
+const secret = `${process.env.HASH}`
 
 class Authorization {
 
     authenticate(req, res, next) {
         const token = req.headers['authorization']
-
+       
 
         if (!token)
             return res.status(400).json({ auth: false, message: 'no token provide' });
@@ -18,11 +18,11 @@ class Authorization {
             //console.log(err);
             return res.status(400).json({ auth: false, message: 'failed to authenticate token' })
         }
-            
-        const { id } = decode.id;
+        
+        const  id  = decode.id
 
         req.user = id;
-
+       
         next();
     })
 }

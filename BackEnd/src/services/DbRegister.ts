@@ -1,7 +1,7 @@
 import UserModel from "../models/UserModel"
 import UserLogin from "../models/UserLogin"
 import { IUser, IUserLogin } from "../Interfaces/InterfaceUser"
-
+import bcrypt from 'bcrypt'
 
 class DbRegister {
 
@@ -16,8 +16,12 @@ class DbRegister {
         const findEmail = await UserLogin.findOne({
             email: data.email
         })
+        if (!findEmail) {
+            return null
+        }
+        const compare = await bcrypt.compare(data.password, findEmail.password)
 
-        if (findEmail && findEmail.password === data.password) {
+        if (compare) {
             return findEmail
         }
 
