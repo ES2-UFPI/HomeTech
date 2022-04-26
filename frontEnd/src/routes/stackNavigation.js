@@ -3,19 +3,19 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CadastroTech from "../pages/tecnico/Cadastro"
 import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
-
 import CadCategoriaTech from "../pages/tecnico/CadCategoriaTech"
-import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
+//import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
 import ListAutomotivo from "../pages/tecnico/CadListAutomoveis"
 import ListEventos from "../pages/tecnico/CadListEventos"
 import ListModaeBeleza from "../pages/tecnico/CadListModaBeleza"
 import ListReformas from "../pages/tecnico/CadListReformasReparos"
-
+import Loguin from "../pages/Client/Loguin"
+import LoguinTech from "../pages/tecnico/Loguin"
 import Forms from "../pages/Client/Forms"
 import TabRoutesTech from "./TabRoutesTech"
 import TabRoutesClient from "./TabRoutesClient";
 import Cadastro from "../pages/Client/Cadastro"
-
+import TelaDeInicio from "../pages/TelaDeInicio"
 
 const Stack = createNativeStackNavigator();
 
