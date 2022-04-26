@@ -7,28 +7,55 @@ export default function HomeScreen(navigation) {
 
 return (
 
-<View style={styles.container}>  
+    <SafeAreaView style={styles.container}>
+    <View style={styles.header}>
+      <Text style={styles.headline}>HomeTech </Text>
+    </View>
+
+    <View style={styles.subheader}>
+      <Text style={styles.subHeadline}>serviços disponíveis </Text>
+    </View>
+
+    
 
 
-<Text>Página Home do tecnico </Text>
 
-</View>
-
-
+</SafeAreaView>
 );
 
 
 }
 const styles = StyleSheet.create({
-
     container:{
     
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        
         
     },
 
+    header: {
+        height: 60,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#3B5998",
+      },
+      headline: {
+        color: "#FFF",
+        fontSize: 21,
+        fontWeight: "bold",
+      },
+    
+    subheader:{
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#FFFFFF",
+        marginTop: 8,
+
+    },
+    subHeadline: {
+        color: "#FFF",
+        fontSize: 15,
+        fontWeight: "bold",
+      },
 
 })
