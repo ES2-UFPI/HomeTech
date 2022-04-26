@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React , { Component } from 'react';
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView} from 'react-native';
+import Checkbox from '@react-native-community/checkbox';
 
 
 export default function CadCategoriaTech({navigation}) {
@@ -70,8 +71,13 @@ return id
   <Image source ={item.image} style = {styles.service} />
 </View>
 <Text style = {styles.name}>{item.name}</Text>
+<Checkbox disabled={false} 
+  onAnimationType = 'fill'
+  offAnimationType='fade'
+  boxType='square'/>
 </View>
 </TouchableOpacity>
+
 )
 headerComponent = () => {
   return <Text style = {styles.lisHeadline}>HomeTech Categorias</Text>
@@ -93,15 +99,20 @@ itemSeparator = () => {
 
      data = {services}
      renderItem = {oneService} 
-
      ItemSeparatorComponent = {itemSeparator}
-    
      />
+     <View styles = {styles.wrapButton}>
+       <TouchableOpacity style ={styles.button}>
+         <Text>Show item selected</Text>
+       </TouchableOpacity>
 
+     </View>
      
       </SafeAreaView>
   );
 }
+
+
 const styles = StyleSheet.create({
   listHeader:{
  height: 60,
@@ -147,5 +158,14 @@ marginLeft: 15,
     backgroundColor: '#CCC',
     width: '100%',
     
+  }, 
+  wrapButton:{
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  button:{
+    padding: 16,
+    backgroundColor: 'orange'
+  }
 });

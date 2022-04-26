@@ -5,7 +5,7 @@ import CadastroTech from "../pages/tecnico/Cadastro"
 import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
 
 import CadCategoriaTech from "../pages/tecnico/CadCategoriaTech"
-import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
+//import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
 import ListAutomotivo from "../pages/tecnico/CadListAutomoveis"
 import ListEventos from "../pages/tecnico/CadListEventos"
 import ListModaeBeleza from "../pages/tecnico/CadListModaBeleza"
