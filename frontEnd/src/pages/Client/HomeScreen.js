@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
   let onPressItem = (id) => {
 
     if(id == 1){
-     navigation.navigate('ListAssitenciaTecnica')
+     navigation.navigate('ListAssitenciaTecnicaClient')
     }
     else if (id == 2){
      alert('Serviço Indisponível')

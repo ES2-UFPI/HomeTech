@@ -1,9 +1,12 @@
-import React from 'react';
+
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView } from 'react-native';
 
 
 
-export default function ListAssitenciaTecnica({navigation}) {
+export default function ListAssitenciaTecnicaClient({navigation}) {
+
+  const [service, setService] = useState("");
 
  const assistenciaTecnicaList = [
 
@@ -96,14 +99,17 @@ export default function ListAssitenciaTecnica({navigation}) {
 
  ]
 
- let onPressItem = (id) => {
+ let onPressItem = (name) => {
+
+  setService(name)
+  console.log(service)
   navigation.navigate('Forms')
-return id
+  
  }
 
  const oneService = ( {item} ) => (
   
-    <TouchableOpacity onPress={() => onPressItem(item.id)}>
+    <TouchableOpacity onPress={() => onPressItem(item.name)}>
   <View style = {styles.item}>
   <Text style = {styles.name}>{item.name}</Text>
   </View>
