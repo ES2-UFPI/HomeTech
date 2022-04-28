@@ -81,11 +81,19 @@ export default function ListAutomotivo({navigation}) {
       
 
  ]
+ 
 
+ const servicesSelected = []
  let onPressItem = (name) => {
- {/*
- navigation.navigate("Forms")*/}
-alert('Serviço selececionado : ' + name)
+if(servicesSelected.includes(name)){
+    servicesSelected.splice(servicesSelected.indexOf(name), 1);
+    alert('Serviço Removido : ' + name)
+    alert(servicesSelected)
+}else{
+  servicesSelected.push(name)
+  alert('Serviço selececionado : ' + name)
+  alert(servicesSelected)
+}
  }
 
  const oneService = ( {item} ) => (
@@ -138,6 +146,7 @@ alert('Serviço selececionado : ' + name)
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {
+                    
                     navigation.navigate('LoguinTech')
                   }}
                 >

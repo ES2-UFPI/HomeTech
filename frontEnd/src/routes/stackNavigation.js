@@ -1,10 +1,11 @@
 
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import ListAssitenciaTecnicaClient from "../pages/Client/ListAssitenciaTecnica"
+import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
 
 import CadCategoriaTech from "../pages/tecnico/CadCategoriaTech"
-import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
 import ListAutomotivo from "../pages/tecnico/CadListAutomoveis"
 import ListEventos from "../pages/tecnico/CadListEventos"
 import ListModaeBeleza from "../pages/tecnico/CadListModaBeleza"
@@ -20,8 +21,12 @@ import TelaDeInicio from "../pages/TelaDeInicio"
 import Loguin from "../pages/Client/Loguin"
 import Cadastro from "../pages/Client/Cadastro"
 
+
 import LoguinTech from "../pages/tecnico/Loguin"
 import CadastroTech from "../pages/tecnico/Cadastro"
+
+
+import TelaDeInicio from "../pages/TelaDeInicio"
 
 
 const Stack = createNativeStackNavigator();

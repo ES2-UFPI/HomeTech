@@ -3,6 +3,7 @@ import React , { Component } from 'react';
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView} from 'react-native';
 
 
+
 export default function CadCategoriaTech({navigation}) {
 
  const services = [
@@ -102,6 +103,8 @@ itemSeparator = () => {
       </SafeAreaView>
   );
 }
+
+
 const styles = StyleSheet.create({
   listHeader:{
  height: 60,
