@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev -r dotenv/config ./src/server.ts",
-    "test": "jest --no-cache  --runInBand --detectOpenHandles "
+    "test": "jest s --no-cache  --runInBand --detectOpenHandles "
   },
   "keywords": [],
   "author": "",
