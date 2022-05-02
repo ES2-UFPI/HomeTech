@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView }
 import Checkbox from "../../components/checkbox";
 
 
-export default function ListModaeBeleza({navigation}) {
+export default function CadListModaBeleza({navigation}) {
 
 
 
