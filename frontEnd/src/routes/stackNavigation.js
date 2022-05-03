@@ -2,12 +2,19 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CadastroTech from "../pages/tecnico/Cadastro"
+
+
+
+import Perfil from "../pages/Client/Perfil"
 import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
 import ListModaBeleza from "../pages/Client/ListModaBeleza"
 import ListAutomoveis from "../pages/Client/ListAutomoveis"
 import ListEventos from "../pages/Client/ListEventos"
 import ListReformasReparos from "../pages/Client/ListReformasReparos"
 
+
+
+import PerfilTech from "../pages/tecnico/Perfil"
 import CadCategoriaTech from "../pages/tecnico/CadCategoriaTech"
 import CadListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
 import CadListAutomoveis from "../pages/tecnico/CadListAutomoveis"
@@ -81,6 +88,11 @@ export default function StackNavigation() {
           <Stack.Screen name="CadListEventos" component={CadListEventos}   options={{ headerShown: false }}/>
           <Stack.Screen name="CadListModaBeleza" component={CadListModaBeleza}   options={{ headerShown: false }}/>
           <Stack.Screen name="CadListReformasReparos" component={CadListReformasReparos}   options={{ headerShown: false }}/>
+
+
+          <Stack.Screen name="Perfil" component={Perfil}   options={{ headerShown: false }}/>
+
+        <Stack.Screen name="PerfilTech" component={PerfilTech}   options={{ headerShown: false }}/>
 
          
           <Stack.Screen name="Forms" component={Forms} options={{ headerShown: false }}/>
