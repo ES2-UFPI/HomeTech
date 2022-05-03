@@ -2,13 +2,25 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CadastroTech from "../pages/tecnico/Cadastro"
+
+
+
+import Perfil from "../pages/Client/Perfil"
 import ListAssitenciaTecnica from "../pages/Client/ListAssitenciaTecnica"
+import ListModaBeleza from "../pages/Client/ListModaBeleza"
+import ListAutomoveis from "../pages/Client/ListAutomoveis"
+import ListEventos from "../pages/Client/ListEventos"
+import ListReformasReparos from "../pages/Client/ListReformasReparos"
+
+
+
+import PerfilTech from "../pages/tecnico/Perfil"
 import CadCategoriaTech from "../pages/tecnico/CadCategoriaTech"
-//import ListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
-import ListAutomotivo from "../pages/tecnico/CadListAutomoveis"
-import ListEventos from "../pages/tecnico/CadListEventos"
-import ListModaeBeleza from "../pages/tecnico/CadListModaBeleza"
-import ListReformas from "../pages/tecnico/CadListReformasReparos"
+import CadListAssitenciaTecnica  from "../pages/tecnico/CadListAssitenciaTecnica"
+import CadListAutomoveis from "../pages/tecnico/CadListAutomoveis"
+import CadListEventos from "../pages/tecnico/CadListEventos"
+import CadListModaBeleza from "../pages/tecnico/CadListModaBeleza"
+import CadListReformasReparos from "../pages/tecnico/CadListReformasReparos"
 import Loguin from "../pages/Client/Loguin"
 import LoguinTech from "../pages/tecnico/Loguin"
 import Forms from "../pages/Client/Forms"
@@ -65,13 +77,22 @@ export default function StackNavigation() {
       />
       }
           <Stack.Screen name="ListAssitenciaTecnica" component={ListAssitenciaTecnica}   options={{ headerShown: false }}/>
+          <Stack.Screen name="ListModaBeleza" component={ListModaBeleza}   options={{ headerShown: false }}/>
+          <Stack.Screen name="ListAutomoveis" component={ListAutomoveis}   options={{ headerShown: false }}/>
+          <Stack.Screen name="ListEventos" component={ListEventos}   options={{ headerShown: false }}/>
+          <Stack.Screen name="ListReformasReparos" component={ListReformasReparos}   options={{ headerShown: false }}/>
 
-          <Stack.Screen name="CadListAssitenciaTecnica" component={ListAssitenciaTecnica}   options={{ headerShown: false }}/>
           <Stack.Screen name="CadCategoriaTech" component={CadCategoriaTech}   options={{ headerShown: false }}/>
-          <Stack.Screen name="CadListAutomoveis" component={ListAutomotivo}   options={{ headerShown: false }}/>
-          <Stack.Screen name="CadListEventos" component={ListEventos}   options={{ headerShown: false }}/>
-          <Stack.Screen name="CadListModaBeleza" component={ListModaeBeleza}   options={{ headerShown: false }}/>
-          <Stack.Screen name="CadListReformasReparos" component={ListReformas}   options={{ headerShown: false }}/>
+          <Stack.Screen name="CadListAssitenciaTecnica" component={CadListAssitenciaTecnica}   options={{ headerShown: false }}/>
+          <Stack.Screen name="CadListAutomoveis" component={CadListAutomoveis}   options={{ headerShown: false }}/>
+          <Stack.Screen name="CadListEventos" component={CadListEventos}   options={{ headerShown: false }}/>
+          <Stack.Screen name="CadListModaBeleza" component={CadListModaBeleza}   options={{ headerShown: false }}/>
+          <Stack.Screen name="CadListReformasReparos" component={CadListReformasReparos}   options={{ headerShown: false }}/>
+
+
+          <Stack.Screen name="Perfil" component={Perfil}   options={{ headerShown: false }}/>
+
+        <Stack.Screen name="PerfilTech" component={PerfilTech}   options={{ headerShown: false }}/>
 
          
           <Stack.Screen name="Forms" component={Forms} options={{ headerShown: false }}/>
