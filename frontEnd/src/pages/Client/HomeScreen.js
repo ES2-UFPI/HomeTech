@@ -47,20 +47,20 @@ export default function Home({ navigation }) {
   let onPressItem = (id) => {
 
     if(id == 1){
-     navigation.navigate('ListServices')
+     navigation.navigate('ListAssitenciaTecnicaClient')
     }
     else if (id == 2){
-     alert('Serviço Indisponível')
+      navigation.navigate('ListAutomoveis')
     }
     else if (id == 3){
-     alert('Serviço Indisponível')
+      navigation.navigate('ListEventos')
       
     }
     else if (id ==4){
-     alert('Serviço Indisponível')
+      navigation.navigate('ListModaBeleza')
     }
     else if(id==5){
-     alert('Serviço Indisponível')
+      navigation.navigate('ListReformasReparos')
     }
  
  return id
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     fontSize: 19,
     paddingLeft: 15,
     paddingRight: 15,
-    color: "#FFFFFF",
+  color: "#FFFFFF",
     justifyContent: "center",
     flex: 1,
   },

@@ -1,10 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 
+
 import StackNavigation   from './src/routes/stackNavigation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabRoutesTech from './src/routes/TabRoutesTech';
 import TabRoutesClient from './src/routes/TabRoutesClient';
+
 
 const Stack = createNativeStackNavigator()
 
