@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
 ScrollView,
 } from "react-native";
+import { api } from "../../api/api";
 
 
 export default function Cadastro({ navigation }) {
@@ -57,7 +58,9 @@ export default function Cadastro({ navigation }) {
       nome: `${values.nome}_${values.sobrenome}`,
     });
    */
-    navigation.navigate("Login");
+     await api().post("/create/loginandsenha",{email:values.email,password:values.senha})
+     //alert(response.data)
+     navigation.navigate("Login");
   };
 
   function CheckedSexo() {
