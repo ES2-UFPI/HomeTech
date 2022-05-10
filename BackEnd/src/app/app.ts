@@ -3,7 +3,6 @@ import morgan from 'morgan'
 import router from "../routes/routes"
 import cors from "cors"
 
-
 const app = express()
 app.use(express.json())
 app.use(morgan('dev'))

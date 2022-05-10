@@ -32,7 +32,7 @@ class UserController {
 
     }
     async Register(req: any, res: Response): Promise<Response> {
-        console.log(req.user)
+
         try {
             const user: IUser = req.body
             user.login = new mongoose.Types.ObjectId(req.user)
