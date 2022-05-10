@@ -47,7 +47,7 @@ export default function Home({ navigation }) {
   let onPressItem = (id) => {
 
     if(id == 1){
-     navigation.navigate('ListAssitenciaTecnicaClient')
+     navigation.navigate('ListAssitenciaTecnica')
     }
     else if (id == 2){
       navigation.navigate('ListAutomoveis')

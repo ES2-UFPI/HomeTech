@@ -15,14 +15,13 @@ export default function App() {
     <NavigationContainer>
 
        <Stack.Navigator screenOptions={{ headerShown: false }}>
-
-       
+    
        <Stack.Screen name="Stack" component={StackNavigation} />
 
         <Stack.Screen name="TabRoutesClient" component={TabRoutesClient} />
 
        <Stack.Screen name="TabRoutesTech" component={TabRoutesTech} />     
-
+     
 
       </Stack.Navigator>
     </NavigationContainer>
