@@ -83,7 +83,7 @@ export default function TelaDeInicio({navigation}) {
 									height: 44,
 									width: 146,
 									backgroundColor: "black",
-									borderRadius: 15,
+									borderRadius: 16,
 									alignItems: "center",
 									justifyContent: "center",
 								}}
