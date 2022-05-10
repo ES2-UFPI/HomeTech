@@ -24,7 +24,7 @@ export default function Forms(navigation) {
     const [listDays, setListDays] = useState([]);
     const [listHours, setListHours] = useState([]);
 
-    const months = [
+    const months = [ 
       'janeiro',
       'Fevereiro',
       'Março',
@@ -37,6 +37,7 @@ export default function Forms(navigation) {
       'Outubro',
       'Novembro',
       'Dezembro'
+      
      ];
     
     
@@ -53,62 +54,96 @@ export default function Forms(navigation) {
     
     
     
-     const hours = [
+     const available = [
     
-      {
-        id:1,
-        hour:"08:00", 
+      { id: 1,
+        date:"2022-05-10",
+        hour:["08:00",
+             "09:00",
+             "10:00",
+             "11:00"]  
     
       },
       {
         id:2,
-        hour:"09:00", 
-    
+        date:"2022-05-11",
+        hour:["08:00",
+             "14:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:3,
-        hour:"10:00", 
-    
+        date:"2022-05-12",
+        hour:["12:00",
+             "13:00",
+             "14:00",
+             "16:00"]  
       },
       {
         id:4,
-        hour:"11:00", 
-    
+        date:"2022-05-13",
+        hour:["07:00",
+             "09:00",
+             "14:00",
+             "16:00"]  
       },
       {
         id:5,
-        hour:"12:00", 
-    
+        date:"2022-05-14",
+        hour:["08:00",
+             "13:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:6,
-        hour:"13:00", 
+        date:"2022-05-15",
+        hour:["07:00",
+             "09:00",
+             "13:00",
+             "15:00"]   
     
       },
       {
         id:7,
-        hour:"14:00", 
-    
+        date:"2022-05-16",
+        hour:["13:00",
+             "14:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:8,
-        hour:"15:00", 
-    
+        date:"2022-05-17",
+        hour:["07:00",
+             "09:00",
+             "10:00",
+             "12:00"]  
       },
       {
         id:9,
-        hour:"16:00", 
-    
+        date:"2022-05-18",
+        hour:["08:00",
+             "09:00",
+             "11:00",
+             "12:00"]  
       },
       {
         id:10,
-        hour:"17:00", 
-    
+        date:"2022-05-19",
+        hour:[
+             "09:00",
+             "10:00",
+             "11:00"]  
       },
       {
         id:11,
-        hour:"18:00", 
-    
+        date:"2022-05-20",
+        hour:["13:00",
+             "15:00",
+             "16:00",
+             "19:00"]  
       },
       
       
@@ -129,14 +164,16 @@ export default function Forms(navigation) {
         let year = d.getFullYear();
         let month = d.getMonth() + 1;
         let day = d.getDate();
-        month = month <10 ? '0'+ day : day;
+        month = month <10 ? '0'+ month : month;
+        day = day < 10? '0'+ day : day;
         let selDate = `${year}-${month}-${day}`;
-      
+       
+        let avaiability =  available.filter(e=>e.date === selDate);
 
 
 
         newListDays.push({
-       
+        status: avaiability.length > 0 && avaiability.length!=null ? true : false,
         weekday: days[d.getDay()],
         number: i
         
@@ -160,11 +197,20 @@ export default function Forms(navigation) {
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
-      month = month <10 ? '0'+ day : day;
+      month = month <10 ? '0'+ month : month;
+        day = day < 10? '0'+ day : day;
       let selDate = `${year}-${month}-${day}`;
+       console.log(selDate);
+      let avaiability =  available.filter(e=>e.date === selDate);
+      console.log(avaiability);
+      if(avaiability.length >0){
+        setListHours(avaiability[0].hour);
+        }
+        console.log("aqui é a lista : " + listHours);
 
-     }
-
+        console.log("aqui é o dia selecionado : " + selectedDay);
+ 
+     }    
 
     }, [selectedDay]);
 
@@ -231,7 +277,7 @@ setSelectedDay(0);
 
              <View>
                  
-                    <Text style={styles.fieldName}>Qual marca/modelo produto?</Text>
+                    <Text style={styles.fieldName}>Qual marca/modelo produto? </Text>
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
@@ -313,7 +359,7 @@ setSelectedDay(0);
                    
                    
                    
-                   <TouchableOpacity style={styles.dateItem} key={key} onPress={()=>{}}>
+                   <TouchableOpacity style={{opacity : item.status?1:0.5} && styles.dateItem} key={key}  onPress={()=>setSelectedDay(item.number) }>
               
                 <Text style={styles.dateItemWeekDay}>{item.weekday} </Text>
 
@@ -329,23 +375,31 @@ setSelectedDay(0);
                 </View>
 
                 </View>
-            
-
-
-
-
-                <View style={styles.timeContainer}>
+                    
                 
-                <View style={styles.timeInfo}>              
+               
+                <View style={styles.TimeInfo}>              
              
-              <FlatList horizontal={true}      
-       data = {hours}
-       renderItem = {oneHour}      
-       />                                        
+             <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
+             
+             {listHours.map((item,key)=>(
+                
+               
+                
+                <TouchableOpacity style={styles.dateItem} key={key}  onPress={()=>setSelectedHour(item.hour) }>
+           
 
-                </View>
+             <Text style={styles.dateItemNumber}> {item} </Text>
+              
+            </TouchableOpacity>
+                
+             ))}
+                               
+              </ScrollView>
+              </View>
 
-                </View>
+
+              
               
 
                   <View style={styles.buttonContainer}>
@@ -474,7 +528,7 @@ lineHeight:25,
         paddingTop: 5,
         paddingBottom: 5,
         alignItems: "center",
-
+        
         
       },
 
@@ -488,6 +542,14 @@ lineHeight:25,
         fontWeight: 'bold',
      
       },
+      TimeInfo: {
+   
+        alignItems: "center",
+        justifyContent: "center",
+        
+        
+      
+            },
 
 
      
