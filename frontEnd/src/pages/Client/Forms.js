@@ -1,8 +1,9 @@
 import { Formik } from 'formik';
 import React, { useState,useEffect } from 'react';
-import { StyleSheet, Text,FlatList, View,TextInput ,Image,ScrollView,TouchableOpacity, SafeAreaView ,Button} from 'react-native';
+import { StyleSheet, Text,FlatList, View,TextInput ,Alert ,Image,ScrollView,TouchableOpacity, SafeAreaView ,Button} from 'react-native';
 import NavPrevIcon from '../../assets/nav_prev.svg';
 import NavNextIcon from '../../assets/nav_next.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 import {
@@ -13,10 +14,13 @@ import {
 
 
 export default function Forms(navigation) {
-    const [marca, setMarca] = useState('');
-    const [garantia, setGarantia] = useState('');
-    const [problema, setProblema] = useState('');
-    const [informacoeasAdicionais, setInformacoeasAdicionais] = useState('');
+  
+  const[service,setService] = useState("");
+
+    const [marca, setMarca] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [problema, setProblema] = useState("");
+    const [informacoeasAdicionais, setInformacoeasAdicionais] = useState("");
     const [selectedYear,setSelectedYear] = useState(0);
     const [selectedMonth,setSelectedMonth] = useState(0);
     const [selectedDay,setSelectedDay] = useState(0);
@@ -24,7 +28,40 @@ export default function Forms(navigation) {
     const [listDays, setListDays] = useState([]);
     const [listHours, setListHours] = useState([]);
 
-    const months = [
+
+
+    async function handleFetchData(){
+      const service = await AsyncStorage.getItem("@saveservice:chooosed");
+  
+      setService(service) 
+
+    }
+
+    useEffect(() => {
+
+      handleFetchData();
+    
+    },[]);
+    
+
+
+
+    
+    async function handleNew(){
+      await AsyncStorage.setItem("@saveforms:service", service);
+   await AsyncStorage.setItem("@saveforms:marca", marca);
+   await AsyncStorage.setItem("@saveforms:garantia", garantia);
+   await AsyncStorage.setItem("@saveforms:problema", problema);
+   await AsyncStorage.setItem("@saveforms:informacoeasAdicionais", informacoeasAdicionais);
+   await AsyncStorage.setItem("@saveforms:hour", JSON.stringify(selectedHour));
+   await AsyncStorage.setItem("@saveforms:day", JSON.stringify(selectedDay));
+   await AsyncStorage.setItem("@saveforms:month", JSON.stringify(selectedMonth));
+   await AsyncStorage.setItem("@saveforms:year", JSON.stringify(selectedYear));
+
+  
+  }
+
+    const months = [ 
       'janeiro',
       'Fevereiro',
       'Março',
@@ -37,6 +74,7 @@ export default function Forms(navigation) {
       'Outubro',
       'Novembro',
       'Dezembro'
+      
      ];
     
     
@@ -53,62 +91,96 @@ export default function Forms(navigation) {
     
     
     
-     const hours = [
+     const available = [
     
-      {
-        id:1,
-        hour:"08:00", 
+      { id: 1,
+        date:"2022-05-10",
+        hour:["08:00",
+             "09:00",
+             "10:00",
+             "11:00"]  
     
       },
       {
         id:2,
-        hour:"09:00", 
-    
+        date:"2022-05-11",
+        hour:["08:00",
+             "14:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:3,
-        hour:"10:00", 
-    
+        date:"2022-05-12",
+        hour:["12:00",
+             "13:00",
+             "14:00",
+             "16:00"]  
       },
       {
         id:4,
-        hour:"11:00", 
-    
+        date:"2022-05-13",
+        hour:["07:00",
+             "09:00",
+             "14:00",
+             "16:00"]  
       },
       {
         id:5,
-        hour:"12:00", 
-    
+        date:"2022-05-14",
+        hour:["08:00",
+             "13:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:6,
-        hour:"13:00", 
+        date:"2022-05-15",
+        hour:["07:00",
+             "09:00",
+             "13:00",
+             "15:00"]   
     
       },
       {
         id:7,
-        hour:"14:00", 
-    
+        date:"2022-05-16",
+        hour:["13:00",
+             "14:00",
+             "15:00",
+             "16:00"]  
       },
       {
         id:8,
-        hour:"15:00", 
-    
+        date:"2022-05-17",
+        hour:["07:00",
+             "09:00",
+             "10:00",
+             "12:00"]  
       },
       {
         id:9,
-        hour:"16:00", 
-    
+        date:"2022-05-18",
+        hour:["08:00",
+             "09:00",
+             "11:00",
+             "12:00"]  
       },
       {
         id:10,
-        hour:"17:00", 
-    
+        date:"2022-05-19",
+        hour:[
+             "09:00",
+             "10:00",
+             "11:00"]  
       },
       {
         id:11,
-        hour:"18:00", 
-    
+        date:"2022-05-20",
+        hour:["13:00",
+             "15:00",
+             "16:00",
+             "19:00"]  
       },
       
       
@@ -116,8 +188,6 @@ export default function Forms(navigation) {
     
      ];
     
-    
-
 
     useEffect(() => {
       let daysInMonth = new Date(selectedYear, selectedMonth +1, 0).getDate();
@@ -129,14 +199,16 @@ export default function Forms(navigation) {
         let year = d.getFullYear();
         let month = d.getMonth() + 1;
         let day = d.getDate();
-        month = month <10 ? '0'+ day : day;
+        month = month <10 ? '0'+ month : month;
+        day = day < 10? '0'+ day : day;
         let selDate = `${year}-${month}-${day}`;
-      
+       
+        let avaiability =  available.filter(e=>e.date === selDate);
 
 
 
         newListDays.push({
-       
+        status: avaiability.length > 0 && avaiability.length!=null ? true : false,
         weekday: days[d.getDay()],
         number: i
         
@@ -160,11 +232,17 @@ export default function Forms(navigation) {
       let year = d.getFullYear();
       let month = d.getMonth() + 1;
       let day = d.getDate();
-      month = month <10 ? '0'+ day : day;
+      month = month <10 ? '0'+ month : month;
+        day = day < 10? '0'+ day : day;
       let selDate = `${year}-${month}-${day}`;
-
-     }
-
+     
+      let avaiability =  available.filter(e=>e.date === selDate);
+    
+      if(avaiability.length >0){
+        setListHours(avaiability[0].hour);
+        }
+        
+     }    
 
     }, [selectedDay]);
 
@@ -198,16 +276,12 @@ setSelectedDay(0);
 
 
     }
-    const oneHour = ( {item} ) => (
-  
-      <TouchableOpacity  onPress={()=>{}}>
-    <View style = {styles.dateItem}>
-    <Text style = {styles.dateItemWeekDay}>{item.hour}</Text>
-    </View>
-    </TouchableOpacity>
-    )
-
-  
+    
+    
+      
+    
+   
+    
     
     return(
       
@@ -223,21 +297,24 @@ setSelectedDay(0);
       </View>
         <View style={styles.inputWrapper} >
              
-         {/*
-          imprimir serviço selecionado         
-         */
-         }
+      
 
+
+        <View> 
+           <Text style={styles.textIncluded} > Serviço selecionado : {service} </Text>
+           
+           </View>
 
              <View>
                  
-                    <Text style={styles.fieldName}>Qual marca/modelo produto?</Text>
+                    <Text style={styles.fieldName}>Qual marca/modelo produto? </Text>
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
                         value={marca}
-                        onChange ={ e => setMarca(e.target.value)}
-                    
+                        onChangeText = {setMarca}
+                        
+                       
                       />
                     </View>
                   </View>
@@ -246,8 +323,9 @@ setSelectedDay(0);
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
-                        value={garantia}
-                        onChange ={ e => setGarantia(e.target.value)}
+                        value={problema}
+                        onChangeText = {setProblema}
+                        
                         
                     
                       />
@@ -258,8 +336,9 @@ setSelectedDay(0);
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
-                        value={problema}
-                        onChange ={ e => setProblema(e.target.value)}                       
+                        value={garantia}
+                        onChangeText = {setGarantia}
+                                              
                     
                       />
                     </View>
@@ -270,7 +349,8 @@ setSelectedDay(0);
                       <TextInput
                         style={styles.fieldText}
                         value={informacoeasAdicionais}
-                        onChange ={ e => setInformacoeasAdicionais(e.target.value)}
+                        onChangeText = {setInformacoeasAdicionais}
+                      
                                             
                       />
                     </View>
@@ -313,7 +393,7 @@ setSelectedDay(0);
                    
                    
                    
-                   <TouchableOpacity style={styles.dateItem} key={key} onPress={()=>{}}>
+                   <TouchableOpacity style={{opacity : item.status?1:0.5} && styles.dateItem} key={key}  onPress={()=>setSelectedDay(item.number) }>
               
                 <Text style={styles.dateItemWeekDay}>{item.weekday} </Text>
 
@@ -329,30 +409,39 @@ setSelectedDay(0);
                 </View>
 
                 </View>
-            
-
-
-
-
-                <View style={styles.timeContainer}>
+                    
                 
-                <View style={styles.timeInfo}>              
+               
+                <View style={styles.TimeInfo}>              
              
-              <FlatList horizontal={true}      
-       data = {hours}
-       renderItem = {oneHour}      
-       />                                        
+             <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
+             
+             {listHours.map((item,key)=>(
+                
+               
 
-                </View>
+                
+                <TouchableOpacity style={styles.HourItem} key={key}  onPress={()=> setSelectedHour(item)}>
+           
 
-                </View>
+             <Text style={styles.HourNumber}> {item} </Text>
               
+            </TouchableOpacity>
+                
+             ))}
+                               
+              </ScrollView>
+              </View>
 
+  
+                  
                   <View style={styles.buttonContainer}>
                   <Button 
                   color="#3B5998"
         title="Enviar"
-        onPress={() => alert('Enviado')}
+        onPress={handleNew }
+        
+        
       />
       </View>
                  
@@ -421,7 +510,12 @@ lineHeight:25,
         borderRadius: 6,
         justifyContent: "center",
       },
-
+      textIncluded:{
+        marginTop: 30,
+        fontFamily: 'sans-serif-medium',
+        fontWeight: 'bold',
+        fontSize:18,
+      },
       fieldName: {
        marginTop: 30,
        fontFamily: 'sans-serif-medium',
@@ -438,7 +532,7 @@ lineHeight:25,
 
       dateContainer: {
         
-        
+        marginTop: 15,
       },
       
       dateInfo: {
@@ -474,7 +568,7 @@ lineHeight:25,
         paddingTop: 5,
         paddingBottom: 5,
         alignItems: "center",
-
+        
         
       },
 
@@ -488,14 +582,31 @@ lineHeight:25,
         fontWeight: 'bold',
      
       },
+      TimeInfo: {
+   
+        alignItems: "center",
+        justifyContent: "center",
+        
+        
+      
+            },
 
 
      
 
       buttonContainer:{
         marginTop: 20,
-
+       
       },
-    
+
+      HourItem:{
+        
+      },
+      HourNumber:{
+        fontSize: 15,
+        paddingTop: 6,
+   paddingRight: 25,
+   fontWeight: 'bold',
+      }
 
           });
