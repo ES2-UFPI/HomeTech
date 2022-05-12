@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Image,FlatList,TouchableOpacity, SafeAreaView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 
 
@@ -7,6 +9,12 @@ export default function ListAssitenciaTecnica({navigation}) {
 
   const [service, setService] = useState("");
 
+  async function handleNew(){
+ 
+    await AsyncStorage.setItem("@saveservice:chooosed", service);
+    
+   }
+  
  const assistenciaTecnicaList = [
 
     {
@@ -89,8 +97,7 @@ export default function ListAssitenciaTecnica({navigation}) {
  let onPressItem = (name) => {
 
   setService(name)
-  console.log(service)
-  navigation.navigate('Forms')
+ 
   
   
  }
@@ -131,6 +138,34 @@ export default function ListAssitenciaTecnica({navigation}) {
       
      
        />
+
+
+<View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 30,
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    handleNew()
+                    console.log(service)
+                    navigation.navigate('Forms')
+                  }}
+                >
+                  <Text
+                    style={{ color: "white", fontSize: 20, fontWeight: "700" }}
+                  >
+                    confirmar
+                  </Text>
+                </TouchableOpacity>
+                
+              </View>
+
         </SafeAreaView>
     );
   }
@@ -173,5 +208,15 @@ export default function ListAssitenciaTecnica({navigation}) {
       width: '100%',
       
     },
+    button: {
+      height: 38,
+      width: 105,
+      flex:1,
+      backgroundColor: "#3B5998",
+      borderRadius: 15,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
   });
   

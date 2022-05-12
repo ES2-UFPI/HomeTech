@@ -28,7 +28,7 @@ import TabRoutesTech from "./TabRoutesTech"
 import TabRoutesClient from "./TabRoutesClient";
 import Cadastro from "../pages/Client/Cadastro"
 import TelaDeInicio from "../pages/TelaDeInicio"
-
+ import DetalhesPedido from "../pages/tecnico/DetalhesPedido";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigation() {
@@ -45,7 +45,7 @@ export default function StackNavigation() {
       <Stack.Screen
         name="Loguin"
         component={Loguin}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen name="Cadastro" component={Cadastro} />
@@ -54,7 +54,7 @@ export default function StackNavigation() {
       <Stack.Screen
         name="LoguinTech"
         component={LoguinTech}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
 
       <Stack.Screen name="CadastroTech" component={CadastroTech} />
@@ -89,6 +89,8 @@ export default function StackNavigation() {
           <Stack.Screen name="CadListModaBeleza" component={CadListModaBeleza}   options={{ headerShown: false }}/>
           <Stack.Screen name="CadListReformasReparos" component={CadListReformasReparos}   options={{ headerShown: false }}/>
 
+
+          <Stack.Screen name="DetalhesPedido" component={DetalhesPedido}   options={{ headerShown: false }}/>
 
           <Stack.Screen name="Perfil" component={Perfil}   options={{ headerShown: false }}/>
 
