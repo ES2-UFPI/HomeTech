@@ -1,8 +1,9 @@
 import { Formik } from 'formik';
 import React, { useState,useEffect } from 'react';
-import { StyleSheet, Text,FlatList, View,TextInput ,Image,ScrollView,TouchableOpacity, SafeAreaView ,Button} from 'react-native';
+import { StyleSheet, Text,FlatList, View,TextInput ,Alert ,Image,ScrollView,TouchableOpacity, SafeAreaView ,Button} from 'react-native';
 import NavPrevIcon from '../../assets/nav_prev.svg';
 import NavNextIcon from '../../assets/nav_next.svg';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 import {
@@ -13,16 +14,52 @@ import {
 
 
 export default function Forms(navigation) {
-    const [marca, setMarca] = useState('');
-    const [garantia, setGarantia] = useState('');
-    const [problema, setProblema] = useState('');
-    const [informacoeasAdicionais, setInformacoeasAdicionais] = useState('');
+  
+  const[service,setService] = useState("");
+
+    const [marca, setMarca] = useState("");
+    const [garantia, setGarantia] = useState("");
+    const [problema, setProblema] = useState("");
+    const [informacoeasAdicionais, setInformacoeasAdicionais] = useState("");
     const [selectedYear,setSelectedYear] = useState(0);
     const [selectedMonth,setSelectedMonth] = useState(0);
     const [selectedDay,setSelectedDay] = useState(0);
     const [selectedHour,setSelectedHour] = useState(null);
     const [listDays, setListDays] = useState([]);
     const [listHours, setListHours] = useState([]);
+
+
+
+    async function handleFetchData(){
+      const service = await AsyncStorage.getItem("@saveservice:chooosed");
+  
+      setService(service) 
+
+    }
+
+    useEffect(() => {
+
+      handleFetchData();
+    
+    },[]);
+    
+
+
+
+    
+    async function handleNew(){
+      await AsyncStorage.setItem("@saveforms:service", service);
+   await AsyncStorage.setItem("@saveforms:marca", marca);
+   await AsyncStorage.setItem("@saveforms:garantia", garantia);
+   await AsyncStorage.setItem("@saveforms:problema", problema);
+   await AsyncStorage.setItem("@saveforms:informacoeasAdicionais", informacoeasAdicionais);
+   await AsyncStorage.setItem("@saveforms:hour", JSON.stringify(selectedHour));
+   await AsyncStorage.setItem("@saveforms:day", JSON.stringify(selectedDay));
+   await AsyncStorage.setItem("@saveforms:month", JSON.stringify(selectedMonth));
+   await AsyncStorage.setItem("@saveforms:year", JSON.stringify(selectedYear));
+
+  
+  }
 
     const months = [ 
       'janeiro',
@@ -151,8 +188,6 @@ export default function Forms(navigation) {
     
      ];
     
-    
-
 
     useEffect(() => {
       let daysInMonth = new Date(selectedYear, selectedMonth +1, 0).getDate();
@@ -200,16 +235,13 @@ export default function Forms(navigation) {
       month = month <10 ? '0'+ month : month;
         day = day < 10? '0'+ day : day;
       let selDate = `${year}-${month}-${day}`;
-       console.log(selDate);
+     
       let avaiability =  available.filter(e=>e.date === selDate);
-      console.log(avaiability);
+    
       if(avaiability.length >0){
         setListHours(avaiability[0].hour);
         }
-        console.log("aqui é a lista : " + listHours);
-
-        console.log("aqui é o dia selecionado : " + selectedDay);
- 
+        
      }    
 
     }, [selectedDay]);
@@ -244,16 +276,12 @@ setSelectedDay(0);
 
 
     }
-    const oneHour = ( {item} ) => (
-  
-      <TouchableOpacity  onPress={()=>{}}>
-    <View style = {styles.dateItem}>
-    <Text style = {styles.dateItemWeekDay}>{item.hour}</Text>
-    </View>
-    </TouchableOpacity>
-    )
-
-  
+    
+    
+      
+    
+   
+    
     
     return(
       
@@ -269,11 +297,13 @@ setSelectedDay(0);
       </View>
         <View style={styles.inputWrapper} >
              
-         {/*
-          imprimir serviço selecionado         
-         */
-         }
+      
 
+
+        <View> 
+           <Text style={styles.textIncluded} > Serviço selecionado : {service} </Text>
+           
+           </View>
 
              <View>
                  
@@ -282,8 +312,9 @@ setSelectedDay(0);
                       <TextInput
                         style={styles.fieldText}
                         value={marca}
-                        onChange ={ e => setMarca(e.target.value)}
-                    
+                        onChangeText = {setMarca}
+                        
+                       
                       />
                     </View>
                   </View>
@@ -292,8 +323,9 @@ setSelectedDay(0);
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
-                        value={garantia}
-                        onChange ={ e => setGarantia(e.target.value)}
+                        value={problema}
+                        onChangeText = {setProblema}
+                        
                         
                     
                       />
@@ -304,8 +336,9 @@ setSelectedDay(0);
                     <View style={styles.input}>
                       <TextInput
                         style={styles.fieldText}
-                        value={problema}
-                        onChange ={ e => setProblema(e.target.value)}                       
+                        value={garantia}
+                        onChangeText = {setGarantia}
+                                              
                     
                       />
                     </View>
@@ -316,7 +349,8 @@ setSelectedDay(0);
                       <TextInput
                         style={styles.fieldText}
                         value={informacoeasAdicionais}
-                        onChange ={ e => setInformacoeasAdicionais(e.target.value)}
+                        onChangeText = {setInformacoeasAdicionais}
+                      
                                             
                       />
                     </View>
@@ -385,11 +419,12 @@ setSelectedDay(0);
              {listHours.map((item,key)=>(
                 
                
+
                 
-                <TouchableOpacity style={styles.dateItem} key={key}  onPress={()=>setSelectedHour(item.hour) }>
+                <TouchableOpacity style={styles.HourItem} key={key}  onPress={()=> setSelectedHour(item)}>
            
 
-             <Text style={styles.dateItemNumber}> {item} </Text>
+             <Text style={styles.HourNumber}> {item} </Text>
               
             </TouchableOpacity>
                 
@@ -398,15 +433,15 @@ setSelectedDay(0);
               </ScrollView>
               </View>
 
-
-              
-              
-
+  
+                  
                   <View style={styles.buttonContainer}>
                   <Button 
                   color="#3B5998"
         title="Enviar"
-        onPress={() => alert('Enviado')}
+        onPress={handleNew }
+        
+        
       />
       </View>
                  
@@ -475,7 +510,12 @@ lineHeight:25,
         borderRadius: 6,
         justifyContent: "center",
       },
-
+      textIncluded:{
+        marginTop: 30,
+        fontFamily: 'sans-serif-medium',
+        fontWeight: 'bold',
+        fontSize:18,
+      },
       fieldName: {
        marginTop: 30,
        fontFamily: 'sans-serif-medium',
@@ -492,7 +532,7 @@ lineHeight:25,
 
       dateContainer: {
         
-        
+        marginTop: 15,
       },
       
       dateInfo: {
@@ -556,8 +596,17 @@ lineHeight:25,
 
       buttonContainer:{
         marginTop: 20,
-
+       
       },
-    
+
+      HourItem:{
+        
+      },
+      HourNumber:{
+        fontSize: 15,
+        paddingTop: 6,
+   paddingRight: 25,
+   fontWeight: 'bold',
+      }
 
           });
